@@ -19,7 +19,7 @@
 
 </head>
 <body class="{{body_class}}">
-
+    <div id="root"> </div>
     <div class="site-wrapper">
 
         {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
@@ -143,6 +143,13 @@
             });
         });
     </script>
+
+    {{#if @member}}
+        <script src="{{asset "built/members.js"}}"></script>
+        <script>
+            window.GhostMembers.initMembersJS({email: "{{@member.email}}", logo: "{{img_url @site.logo}}"})
+        </script>
+    {{/if}}
 
     {{!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. --}}
     {{{block "scripts"}}}
