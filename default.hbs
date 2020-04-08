@@ -144,12 +144,30 @@
         });
     </script>
 
-    {{#if @member}}
-        <script src="{{asset "built/members.js"}}"></script>
-        <script>
-            window.GhostMembers.initMembersJS({email: "{{@member.email}}", logo: "{{img_url @site.logo}}"})
-        </script>
-    {{/if}}
+    <script src="{{asset "built/members.js"}}"></script>
+    <script>
+        var data = {
+            site: {
+                title: "{{@site.title}}",
+                description: "{{@site.description}}",
+                logo: "{{img_url @site.logo}}",
+                blogUrl: window.location.origin,
+                adminUrl: window.location.origin + "/ghost"
+            }
+        };
+        {{#if @member}}
+            data.member = {
+                email: "{{@member.email}}",
+                isPaid: "{{@member.paid}}",
+                avatarImage: "{{@member.avatar_image}}",
+                plans: {
+                    monthly: "{{@price.monthly}}",
+                    yearly: "{{@price.yearly}}",
+                }
+            }
+        {{/if}}
+        window.GhostMembers.initMembersJS(data);
+    </script>
 
     {{!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. --}}
     {{{block "scripts"}}}
