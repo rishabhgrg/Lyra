@@ -174,26 +174,37 @@
 
     <script src="{{asset "built/members.js"}}"></script>
     <script>
+        // Read site data
         var data = {
             site: {
                 title: "{{@site.title}}",
                 description: "{{@site.description}}",
                 logo: "{{img_url @site.logo}}",
-                blogUrl: window.location.origin,
-                adminUrl: window.location.origin + "/ghost"
+                siteUrl: window.location.origin,
+                adminUrl: window.location.origin + "/ghost",
+                plans: {
+                    monthly: "{{@price.monthly}}",
+                    yearly: "{{@price.yearly}}",
+                    currency: "{{@price.currency}}",
+                    currencySymbol: "{{@price.currency_symbol}}",
+                }
             }
         };
         {{#if @member}}
+            // Read member data
             data.member = {
                 email: "{{@member.email}}",
-                isPaid: "{{@member.paid}}",
+                isPaid: {{@member.paid}},
                 avatarImage: "{{@member.avatar_image}}",
                 plans: {
                     monthly: "{{@price.monthly}}",
                     yearly: "{{@price.yearly}}",
+                    currency: "{{@price.currency}}",
+                    currencySymbol: "{{@price.currency_symbol}}",
                 }
             }
         {{/if}}
+        // Initialize members.js UI rendering with data
         window.GhostMembers.initMembersJS(data);
     </script>
 
