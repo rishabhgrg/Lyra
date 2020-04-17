@@ -176,19 +176,8 @@
     <script>
         // Read site data
         var data = {
-            site: {
-                title: "{{@site.title}}",
-                description: "{{@site.description}}",
-                logo: "{{img_url @site.logo}}",
-                siteUrl: window.location.origin,
-                adminUrl: window.location.origin + "/ghost",
-                plans: {
-                    monthly: "{{@price.monthly}}",
-                    yearly: "{{@price.yearly}}",
-                    currency: "{{@price.currency}}",
-                    currencySymbol: "{{@price.currency_symbol}}",
-                }
-            }
+            siteUrl: window.location.origin,
+            adminUrl: window.location.origin + "/ghost",
         };
         {{#if @member}}
             // Read member data
