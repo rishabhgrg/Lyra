@@ -176,23 +176,8 @@
     <script>
         // Read site data
         var data = {
-            siteUrl: window.location.origin,
             adminUrl: window.location.origin + "/ghost",
         };
-        {{#if @member}}
-            // Read member data
-            data.member = {
-                email: "{{@member.email}}",
-                isPaid: {{@member.paid}},
-                avatarImage: "{{@member.avatar_image}}",
-                plans: {
-                    monthly: "{{@price.monthly}}",
-                    yearly: "{{@price.yearly}}",
-                    currency: "{{@price.currency}}",
-                    currencySymbol: "{{@price.currency_symbol}}",
-                }
-            }
-        {{/if}}
         // Initialize members.js UI rendering with data
         window.GhostMembers.initMembersJS(data);
     </script>
