@@ -19,7 +19,6 @@
 
 </head>
 <body class="{{body_class}}">
-    <div id="root"> </div>
     <div class="site-wrapper">
 
         {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
@@ -172,15 +171,14 @@
         });
     </script>
 
-    <script src="https://unpkg.com/@tryghost/members-js@0.1.0"></script>
+    <script src="https://unpkg.com/@tryghost/members-js"></script>
     <script>
-        // Read site data
-        var data = {
-            adminUrl: window.location.origin + "/ghost",
-        };
-        // Initialize members.js UI rendering with data
-        window.GhostMembers.initMembersJS(data);
+    // Initializes members.js
+    window.GhostMembers.init({
+        adminUrl: 'youradminurl.com' // Ex. http://localhost:2368/ghost
+    });
     </script>
+
 
     {{!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. --}}
     {{{block "scripts"}}}
